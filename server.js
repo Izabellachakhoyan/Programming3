@@ -118,3 +118,41 @@ function createObject(){
 io.sockets.emit('send matrix', matrix)
 
 }
+
+
+function game(){
+        for (let i in butterflyArr) {
+                butterflyArr[i].mul()
+        }
+
+
+        for(let i in frogArr){
+                frogArr[i].eat()
+        }
+
+     
+
+        for(let i in foxArr){
+                foxArr[i].eat()
+        }
+
+        for(let i in dogArr){
+                dogArr[i].eat()
+        }
+
+        for(let i in lionArr){
+                lionArr[i].eat()
+        }
+        for(let i in dragonArr){
+                dragonArr[i].eat()
+        }
+
+        io.sockets.emit('send matrix', matrix)
+}
+
+setInterval(game,400)
+
+
+io.on("connection",function(){
+        createObject()
+})
