@@ -155,4 +155,29 @@ setInterval(game,400)
 
 io.on("connection",function(){
         createObject()
+    socket.on("addButterfly", AddButterfly);
+    socket.on("addFrog", AddFrog);
+    socket.on("killAll", Kill);
+    socket.on("addFox", AddFox);
+    socket.on("addDog", AddDog);
+    socket.on("addLion", AddLion);
+    socket.on("addDragon", AddDragon);
 })
+
+
+
+
+var statistics = {}
+
+setInterval(function(){
+        statistics.butterfly = butterflyArr.length
+        statistics.frog = frogArr.length
+        statistics.fox = foxArr.length
+        statistics.dog = dogArr.length
+        statistics.lion = lionArr.length
+        statistics.dragon = dragonArr.length
+
+        fs.writeFile("statistics.json",JSON.stringify(statistics),function(){
+                console.log("statistics");
+       })
+},1000)
