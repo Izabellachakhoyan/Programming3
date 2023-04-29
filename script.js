@@ -7,10 +7,20 @@ var side = 30
 
 function setup() {
         createCanvas(25 * side, 25 * side)
-
-
 }
-
+socket.on("Winter", function (data) {
+    weath = data;
+})
+socket.on("Summer", function (data) {
+    weath = data;
+})
+socket.on("Spring", function (data) {
+    weath = data;
+})
+socket.on("Autumn", function (data) {
+    weath = data;
+})
+ var weath = "spring";
 
 function nkarox(matrix) {
 
@@ -30,6 +40,18 @@ function nkarox(matrix) {
                     rect(x * side, y * side, side, side)
                     text("🐸", x * side, y * side + tobot)
                 } else if (matrix[y][x] == 0) {
+                    if (weath == "spring") {
+                        fill("darkgreen");
+                    }
+                    else if (weath == "summer") {
+                        fill("#79a83b");
+                    }
+                    else if (weath == "autumn") {
+                        fill("#ff8453");
+                    }
+                    if (weath == "winter") {
+                        fill("#ffffff");
+                    }
                     fill("#ACD8FF")
                     rect(x * side, y * side, side, side)
                     
@@ -63,3 +85,39 @@ function nkarox(matrix) {
 
 
 socket.on('send matrix',nkarox)
+
+function Winter() {
+    socket.emit("winter");
+}
+function Summer() {
+    socket.emit("summer");
+}
+function Spring() {
+    socket.emit("spring");
+}
+function Autumn() {
+    socket.emit("autumn");
+}
+function AddButterfly(){
+    socket.emit("addButterfly");
+}
+function AddFrog(){
+    socket.emit("addFrog");
+}
+function KillAll(){
+    socket.emit("killAll");
+}
+function AddFox(){
+    socket.emit("addFox");
+}
+function AddDog(){
+    socket.emit("addDog");
+}
+function AddLion(){
+    socket.emit("addLion");
+}
+function AddDragon(){
+    socket.emit("addDragon");
+
+}
+

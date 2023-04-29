@@ -36,11 +36,7 @@
    <h1>GAME OF LIFE</h1>
    <h2>Izabela Chakhoyan <br></h2>
 
-   <button style = "height: 60px; width: 60px; border-radius: 7px; border: 1px blue; background-color: aqua;  "><a href = "info html">Winter</a></button>
-   <button style = "height: 60px; width: 60px; border-radius: 7px; border: 1px yellow; background-color: rgb(255, 242, 0);  "><a href = "info html">Summer</a></button>
-   <button style = "height: 60px; width: 60px; border-radius: 7px; border: 1px rgb(255, 204, 0); background-color: rgb(255, 187, 0);  "><a href = "info html">Autumn</a></button>
-   <button style = "height: 60px; width: 60px; border-radius: 7px; border: 1px rgb(115, 0, 255); background-color: rgb(144, 0, 255);  "><a href = "info html">Spring</a></button>
-
+   
    <div class="all__btns">
     <button onclick="AddButterfly()" class="add__btn" style="background-color: rgb(41, 73, 255)">Add Butterfly</button>
     <button onclick="AddFrog()" class="add__btn" style="background-color: rgb(0, 255, 68)";>Add Frog</button>
@@ -50,6 +46,12 @@
     <button onclick="AddDragon()" class="add__btn" style="background-color: rgb(1, 126, 93)">Add Dragon</button>
     <button onclick="KillAll()" class="add__btn" style="background-color: white; color: black">Kill all</button>
    </div>
+   <div class="exanak__btns">
+    <button onclick="Spring()" class="btn__exanak" style="background-color: darkgreen">Spring</button>
+    <button onclick="Summer()" class="btn__exanak" style="background-color: #79a83b">Summer</button>
+    <button onclick="Autumn()" class="btn__exanak" style="background-color: #ff8453">Autumn</button>
+    <button onclick="Winter()" class="btn__exanak" style="background-color: #ffffff">Winter</button>
+    </div>
 
    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>

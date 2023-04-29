@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs')
+const { kill } = require('process');
 
 app.use(express.static("."));
 
@@ -151,6 +152,136 @@ function game(){
 }
 
 setInterval(game,400)
+
+var weath;
+
+function Winter() {
+    weath = "winter";
+    io.sockets.emit('Winter', weath);
+}
+
+function Summer() {
+    weath = "summer";
+    io.sockets.emit('Summer', weath);
+}
+
+function Spring() {
+    weath = "spring";
+    io.sockets.emit('Spring', weath);
+}
+function Autumn() {
+    weath = "autumn";
+    io.sockets.emit('Autumn', weath);
+}
+
+function Kill() {
+        butterflyArr = [];
+        frogArr = [];
+        foxArr = [];
+        dogArr = [];
+        lionArr = [];
+        dragonArr = [];
+        for (var y = 0; y < matrix.length; y++) {
+            for (var x = 0; x < matrix[y].length; x++) {
+                matrix[y][x] = 0;
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddButterfly() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 1;
+                var butterfly = new Butterfly(x, y);
+                butterflyArr.push(butterfly);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddFrog() {
+        let count = 0;
+        for (var i = 0; i < 50; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (count < 7) {
+                if (i < 30) {
+                    if (matrix[y][x] == 0) {
+                        count++;
+                        matrix[y][x] = 2;
+                        var fr = new Frog(x, y);
+                        frogArr.push(fr);
+                    }
+    
+                } else if (i >= 30) {
+                    if (matrix[y][x] == 0 || matrix[y][x] == 1) {
+                        count++;
+                        matrix[y][x] = 2;
+                        var fr = new Frog(x, y);
+                        frogArr.push(fr);
+                    }
+                }
+            }
+    
+    
+        }
+    
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddFox() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 3;
+                var fx = new Fox(x, y);
+                foxArr.push(fx);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddDog() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 4;
+                var dg = new Dog(x, y);
+                dogArr.push(dg);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    
+    function AddLion() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 5;
+                var ln = new Lion(x, y);
+              lionArr.push(ln);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    
+    function AddDragon() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 6;
+                var dg = new Dragon(x, y);
+                dogArr.push(dg);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    
+    
+    
 
 
 io.on("connection",function(){
