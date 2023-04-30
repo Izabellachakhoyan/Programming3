@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs')
-const { kill } = require('process');
+
 
 app.use(express.static("."));
 
@@ -82,7 +82,7 @@ dragonArr = []
 
 Butterfly = require("./butterfly")
 Frog = require("./frog")
-Fox = require("./frog")
+Fox = require("./fox")
 Dog = require("./dog")
 Lion = require("./lion")
 Dragon = require("./dragon")
@@ -201,41 +201,25 @@ function Kill() {
         io.sockets.emit("send matrix", matrix);
     }
     function AddFrog() {
-        let count = 0;
-        for (var i = 0; i < 50; i++) {
+       for (var i = 0; i < 7; i++){
             var x = Math.floor(Math.random() * matrix[0].length)
             var y = Math.floor(Math.random() * matrix.length)
-            if (count < 7) {
-                if (i < 30) {
                     if (matrix[y][x] == 0) {
-                        count++;
-                        matrix[y][x] = 2;
-                        var fr = new Frog(x, y);
-                        frogArr.push(fr);
-                    }
-    
-                } else if (i >= 30) {
-                    if (matrix[y][x] == 0 || matrix[y][x] == 1) {
-                        count++;
                         matrix[y][x] = 2;
                         var fr = new Frog(x, y);
                         frogArr.push(fr);
                     }
                 }
-            }
-    
-    
-        }
-    
+
         io.sockets.emit("send matrix", matrix);
     }
     function AddFox() {
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < 7; i++){
             var x = Math.floor(Math.random() * matrix[0].length)
             var y = Math.floor(Math.random() * matrix.length)
             if (matrix[y][x] == 0) {
                 matrix[y][x] = 3;
-                var fx = new Fox(x, y);
+               var fx = new Fox(x, y);
                 foxArr.push(fx);
             }
         }
@@ -274,7 +258,7 @@ function Kill() {
             if (matrix[y][x] == 0) {
                 matrix[y][x] = 6;
                 var dg = new Dragon(x, y);
-                dogArr.push(dg);
+                dragonArr.push(dg);
             }
         }
         io.sockets.emit("send matrix", matrix);
@@ -284,8 +268,12 @@ function Kill() {
     
 
 
-io.on("connection",function(){
-        createObject()
+io.on('connection',function(socket){
+        createObject();
+    socket.on("spring", Spring);
+    socket.on("summer", Summer);
+    socket.on("autumn", Autumn);
+    socket.on("winter", Winter);
     socket.on("addButterfly", AddButterfly);
     socket.on("addFrog", AddFrog);
     socket.on("killAll", Kill);

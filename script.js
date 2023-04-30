@@ -1,9 +1,6 @@
 var socket = io()
 
 var side = 30
-///օբյեկտներ պահելու զանգվածներ
-
-
 
 function setup() {
         createCanvas(25 * side, 25 * side)
@@ -39,7 +36,8 @@ function nkarox(matrix) {
                     fill("green")
                     rect(x * side, y * side, side, side)
                     text("🐸", x * side, y * side + tobot)
-                } else if (matrix[y][x] == 0) {
+                }
+                 else if (matrix[y][x] == 0) {
                     if (weath == "spring") {
                         fill("darkgreen");
                     }
@@ -52,7 +50,6 @@ function nkarox(matrix) {
                     if (weath == "winter") {
                         fill("#ffffff");
                     }
-                    fill("#ACD8FF")
                     rect(x * side, y * side, side, side)
                     
     
